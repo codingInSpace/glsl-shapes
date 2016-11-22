@@ -208,6 +208,10 @@ GLuint createShader(char *vertexshaderfile, char *fragmentshaderfile) {
         glGetShaderInfoLog(vertexShader, sizeof(str), NULL, str);
         printError("Vertex shader compile error", str);
   	}
+    //else {
+    //    glGetShaderInfoLog(vertexShader, sizeof(str), NULL, str);
+    //    printError("No Vertex shader compile error", str);
+    //}
 
   	// Create the fragment shader.
     fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
@@ -226,6 +230,11 @@ GLuint createShader(char *vertexshaderfile, char *fragmentshaderfile) {
         glGetShaderInfoLog(fragmentShader, sizeof(str), NULL, str);
         printError("Fragment shader compile error", str);
     }
+
+    //else {
+    //    glGetShaderInfoLog(fragmentShader, sizeof(str), NULL, str);
+    //    printError("No Fragment shader compile error", str);
+    //}
 
     // Create a program object and attach the two compiled shaders.
     programObject = glCreateProgram();
