@@ -200,15 +200,15 @@ void main() {
 	//float alpha = texture(tex, st+vec2(-0.2*time, 0.0)).a;
 
     vec2 F = cellular(pos);
-    float f = F.x - F.y;
+    float f = F.y - F.x;
 
-    float variety = max(0.2, abs(sin(time)));
+    float variety = max(0.2, abs(time));
     vec2 lavavalues = cellular(pos*variety);
     float lavaval = lavavalues.x - lavavalues.y;
 
 	vec3 surfacecolor = vec3(0.2, 0.2, 0.2);
 	vec3 lavacolor = vec3(0.8 + lavaval, 0.2, 0.2);
-	vec3 diffusecolor = mix(surfacecolor, lavacolor, smoothstep(0.0, abs(1.8*f), 0.005));
+	vec3 diffusecolor = mix(surfacecolor, lavacolor, (1 - smoothstep(0.1, 0.11, f)));
 
 	vec3 nNormal = normalize(interpolatedNormal);
 	float diffuselighting = max(0.0, nNormal.z);
