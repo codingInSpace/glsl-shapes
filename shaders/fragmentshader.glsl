@@ -44,7 +44,7 @@ vec2 cellular(vec3 P) {
 #define K2 0.020408163265306 // 1/(7*7)
 #define Kz 0.166666666667 // 1/6
 #define Kzo 0.416666666667 // 1/2-1/6*2
-#define jitter 1.0 // smaller jitter gives more regular pattern
+#define jitter 2.0 // smaller jitter gives more regular pattern
 
 	vec3 Pi = mod289(floor(P));
  	vec3 Pf = fract(P) - 0.5;
@@ -202,14 +202,13 @@ void main() {
     vec2 F = cellular(pos);
     float f = F.x - F.y;
 
-    float variety = max(0.1, abs(sin(time)));
-
+    float variety = max(0.2, abs(sin(time)));
     vec2 lavavalues = cellular(pos*variety);
     float lavaval = lavavalues.x - lavavalues.y;
 
 	vec3 surfacecolor = vec3(0.2, 0.2, 0.2);
 	vec3 lavacolor = vec3(0.8 + lavaval, 0.2, 0.2);
-	vec3 diffusecolor = mix(surfacecolor, lavacolor, step(0.5, abs(1.5*f)));
+	vec3 diffusecolor = mix(surfacecolor, lavacolor, smoothstep(0.0, abs(1.8*f), 0.005));
 
 	vec3 nNormal = normalize(interpolatedNormal);
 	float diffuselighting = max(0.0, nNormal.z);
