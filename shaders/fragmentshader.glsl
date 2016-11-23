@@ -329,15 +329,16 @@ void main() {
 	//vec3 groundcolor = texture(tex,st).rgb;
 	//float alpha = texture(tex, st+vec2(-0.2*time, 0.0)).a;
 
-	vec2 F = cellular(pos + 0.003 * (sin(time)));
+	vec2 F = cellular(pos + 0.003 * (sin(1.2*time)));
 	float f = F.y - F.x;
 
 	float variety = max(0.2, abs(time));
-	float noise = snoise(vec4(7.0 * pos.x, 2.0 * pos.y, 0.7 * pos.z, 0.18 * variety));
+	float lavanoise = snoise(vec4(7.0 * pos.x, 2.0 * pos.y, 0.7 * pos.z, 0.18 * variety));
+	float surfacenoise = snoise(vec4(0.5 * pos.x, 0.7 * pos.y, 1.0 * pos.z, 1.0));
 
-	vec3 surfacecolor = vec3(0.2, 0.2, 0.2);
-	vec3 lavacolor = vec3(0.8 + abs(noise), 0.15 + 1.0 * noise, 0.0);
-	vec3 diffusecolor = mix(surfacecolor, lavacolor, (1 - smoothstep(0.03 + 0.01 * sin(time), 0.04, f)));
+	vec3 surfacecolor = vec3(0.2, 0.2, 0.2) - 0.1 * abs(sin(surfacenoise));
+	vec3 lavacolor = vec3(0.8 + abs(lavanoise), 0.15 + 1.0 * lavanoise, 0.0);
+	vec3 diffusecolor = mix(surfacecolor, lavacolor, (1 - smoothstep(0.03 + 0.01 * sin(1.5*time), 0.05, f)));
 
 	vec3 nNormal = normalize(interpolatedNormal);
 	float diffuselighting = max(0.0, nNormal.z);
