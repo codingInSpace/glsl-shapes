@@ -336,7 +336,7 @@ void main() {
 	float lavanoise = snoise(vec4(7.0 * pos.x, 2.0 * pos.y, 0.7 * pos.z, 0.18 * variety));
 	float surfacenoise = snoise(vec4(0.5 * pos.x, 0.7 * pos.y, 1.0 * pos.z, 1.0));
 
-	vec3 surfacecolor = vec3(0.2, 0.2, 0.2) - 0.1 * abs(sin(surfacenoise));
+	vec3 surfacecolor = vec3(0.2, 0.2, 0.2) - 0.1 * abs(sin(1.3*surfacenoise));
 	vec3 lavacolor = vec3(0.8 + abs(lavanoise), 0.15 + 1.0 * lavanoise, 0.0);
 	vec3 diffusecolor = mix(surfacecolor, lavacolor, (1 - smoothstep(0.03 + 0.01 * sin(1.5*time), 0.05, f)));
 
