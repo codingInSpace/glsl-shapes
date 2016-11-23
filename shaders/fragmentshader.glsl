@@ -333,10 +333,10 @@ void main() {
 	float f = F.y - F.x;
 
 	float variety = max(0.2, abs(time));
-	float noise = snoise(vec4(7.0 * pos.x, 2.0 * pos.y, 0.7 * pos.z, variety));
+	float noise = snoise(vec4(7.0 * pos.x, 2.0 * pos.y, 0.7 * pos.z, 0.15 * variety));
 
 	vec3 surfacecolor = vec3(0.2, 0.2, 0.2);
-	vec3 lavacolor = vec3(0.8 + abs(noise), 0.2 + 1.0 * noise, 0.0);
+	vec3 lavacolor = vec3(0.8 + abs(noise), 0.15 + 1.0 * noise, 0.0);
 	vec3 diffusecolor = mix(surfacecolor, lavacolor, (1 - smoothstep(0.1, 0.11, f)));
 
 	vec3 nNormal = normalize(interpolatedNormal);
