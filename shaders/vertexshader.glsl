@@ -405,7 +405,7 @@ void main() {
         elevation += 0.5/freq*(snoise(Position*4.0*freq)-0.5);
     }
 
-    vec3 finalelevation = 7.0 * elevation * 0.01 * Normal;
+    vec3 finalelevation = 9.0 * elevation * 0.01 * Normal;
     vec3 variedpos = Position + 0.02 * Normal * 10.0 * classicalnoise + finalelevation;
 
     gl_Position = (P * MV) * vec4(variedpos, 1.0);

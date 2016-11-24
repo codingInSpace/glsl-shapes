@@ -340,9 +340,14 @@ void main() {
 	vec3 lavacolor = vec3(0.8 + abs(lavanoise), 0.15 + 1.0 * lavanoise, 0.0);
 	vec3 diffusecolor = mix(surfacecolor, lavacolor, (1 - smoothstep(0.03 + 0.01 * sin(1.5*time), 0.05, f)));
 
+	vec3 specularDirection = normalize(vec3(0.8, 0.5, 1.0));
+	float specularLight = max(0.0, -normalize(reflect(specularDirection, interpolatedNormal)).z);
+	specularLight = pow(specularLight, 1.5);
+	vec3 specularColor = vec3(1.0, 1.0, 1.0) * 0.3;
+
 	vec3 nNormal = normalize(interpolatedNormal);
 	float diffuselighting = max(0.0, nNormal.z);
 
-	color = vec4(diffusecolor*diffuselighting, 1.0);
+	color = vec4(diffusecolor*diffuselighting + specularLight * specularColor, 1.0);
 }
 
