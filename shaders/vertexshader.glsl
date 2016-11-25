@@ -398,14 +398,14 @@ void main() {
     // Meteor
     float classicalnoise = cnoise(vec4(Position, 1.0));
 
-    float elevation = snoise(vec3(0.6 * Position) - 0.5);
+    float elevation = snoise(vec3(1.6 * Position) - 0.5);
 
     float freq;
-    for (freq=1.0; freq<512.0; freq*=2.0) {
+    for (freq=1.0; freq<1024.0; freq*=2.0) {
         elevation += 0.5/freq*(snoise(Position*4.0*freq)-0.5);
     }
 
-    vec3 finalelevation = 9.0 * elevation * 0.01 * Normal;
+    vec3 finalelevation = 10.0 * elevation * 0.01 * Normal;
     vec3 variedpos = Position + 0.02 * Normal * 10.0 * classicalnoise + finalelevation;
 
     gl_Position = (P * MV) * vec4(variedpos, 1.0);
