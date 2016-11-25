@@ -342,8 +342,8 @@ void main() {
 
 	vec3 specularDirection = normalize(vec3(0.8, 0.5, 1.0));
 	float specularLight = max(0.0, -normalize(reflect(specularDirection, interpolatedNormal)).z);
-	specularLight = pow(specularLight, 1.5);
-	vec3 specularColor = vec3(1.0, 1.0, 1.0) * 0.3;
+	specularLight = pow(specularLight, 2.5);
+	vec3 specularColor = vec3(1.0, 0.7, 0.4) * 0.3;
 
 	vec3 nNormal = normalize(interpolatedNormal);
 	float diffuselighting = max(0.0, nNormal.z);
